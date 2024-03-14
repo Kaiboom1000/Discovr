@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    <!-- Latest compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <!--     font link -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Saira"
+    />
+
+    <!--     font awesome link -->
+    <link
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <!-- Import the webpage's stylesheet -->
+    <span>
+        <form class="form-search marginTop10">
+          <input
+            class="searchbar"
+            id="searchVal"
+            type="text"
+            placeholder=" Search"
+            size="25"
+          />
+          <i onclick="searchResults()" class="fa fa-search" type="btn"></i>
+        </form>
+      </span>
+    <link rel="stylesheet" href="/style.css" />
+
+    <!-- Import the webpage's javascript file -->
+    <script src="/admintabledelete.js"></script>
+  </head>
+  <body>
+    <div>
+      <a class="sign-out btn" onclick="signOut()">Sign Out</a>
+    </div>
+     <div>
+      <a href="" class=" btn addProducts" data-toggle="modal" data-target="" onclick="adduser('${u.fields.id}')">Add User (For Bot testing only, if exploited your admin will be removed.)</a>
+    </div>
+    
+    <div>
+      <table class="table">
+      <tr>
+      <th>Name</th>
+      <th>Picture</th>
+      <th>Delete</th>
+
+      </tr>
+    <tbody id="stationeryData">
+    </tbody>
+    </table>
+    </div>
+    <!--Start Section Footer -->
+    <footer class="text-center">
+      <span>All Right Reversed.</span>
+    </footer>
+     <!-- Modal -->
+    <div id="addProducts" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Fill the form to add new products</h4>
+          </div>
+          <div class="modal-body">
+            <form role="form">
+                <div class="form-group float-label-control">
+                    <input type="text" id="name" class="form-control" placeholder="Product Name">
+                </div>
+                <div class="form-group float-label-control">
+                    <input type="number" id="stock" class="form-control" placeholder="Quantity Ordered">
+                </div>
+                <div class="form-group float-label-control">
+                    <input type="text" id="brand" class="form-control" placeholder="Brand of product"/>
+                </div>
+                <div class="form-group float-label-control">
+                    <input type="number" id="price" class="form-control" placeholder="Price per piece"/>
+                </div>
+                <div class="form-group float-label-control">
+                    <a class="btn btn-default" onclick="addProducts()"> Add </a>
+                </div>
+                <div class="form-group float-label-control">
+                    <p class="error">
+                      Please fill all the details.
+                    </p>
+                </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!--End Section Footer -->
+  </body>
+</html>

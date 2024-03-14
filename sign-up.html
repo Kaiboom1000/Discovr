@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>BestBuds</title>
+    
+    <!-- Latest compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+    
+    <!-- Import the webpage's stylesheet -->
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+
+  <body class="bg-sign-up">
+    
+    <!--  loader -->
+    
+    <div id="loading">
+      <img
+        id="loading-image"
+        src="https://s3-whjr-v2-prod-bucket.whjr.online/whjr-v2-prod-bucket/c4acf11c-669d-43f1-b847-5ccae6a71d21.gif"
+      />
+    </div>
+    
+    <!-- Sign up form  -->
+    <img src="https://cdn.glitch.global/50b1383c-fc76-44e1-9dbf-07887448a437/Screenshot%202023-12-05%20at%205.44.23%E2%80%AFPM.png?v=1701778507174" 
+         class="side-img"/>
+    
+    <form class="form-sign-up">
+      <div>
+        <form method="post" enctype="multipart/form-data">
+          <label>Upload avatar first</label><br />
+          <label for="user-photo">User photo:</label><br />
+          <input
+            type="file"
+            id="image"
+            name="files[]"
+            multiple
+            required
+          /><br />
+          <label for="user-name">User name:</label><br />
+          <small
+            >(Username must be unique. Click on check to check if username is
+            available)</small
+          ><br />
+          <input type="text" id="user-name" class="input-1" required />
+          <input
+            type="button"
+            id="check"
+            onclick="usernameAvail()"
+            value="check"
+          /><br />
+          <label id="user-name-check-error">User not avilable</label><br />
+          <label for="user-password">Password:</label><br />
+          <input type="text" id="user-password" class="input-1" required />
+          <label for="aboutMe">About me:</label><br />
+          <textarea
+            id="aboutMe"
+            name="about me"
+            class="input-1"
+            required
+          ></textarea>
+          <label for="BDate">Birth date:</label><br />
+          <input
+            type="date"
+            id="BDate"
+            placeholder="About me"
+            class="input-1"
+            required
+          />
+          <br />
+          <label>Gender:</label>
+          <input
+            type="radio"
+            id="gender-M"
+            name="gender"
+            value="male"
+            required
+          />
+          <label for="gender-M">Male</label>
+          <input
+            type="radio"
+            id="gender-F"
+            name="gender"
+            value="female"
+            required
+          />
+          <label for="gender-F">Female</label>
+          <br />
+          <div id="error-signupfail">Please fill all fields</div>
+
+          <!--  Button for Sign-up -->
+
+          <a type="button"
+            onclick="signUp()"
+            id="signup"
+            class="btn"
+             >Sign Up</a>
+        </form>
+      </div>
+    </form>
+    
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script
+      src="https://kit.fontawesome.com/e6f2fb51b4.js"
+      crossorigin="anonymous"
+    ></script>
+    
+    <!-- Import the webpage's javascript file -->
+    <script src="/script.js" defer></script>
+  </body>
+</html>

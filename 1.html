@@ -1,0 +1,36 @@
+<!-- code for displaying profile information -->
+<div class="margin25">
+    <div class="bio__img-block">
+        <a href="#"><img class="bio__img" src="" alt="profile picture" /></a>
+    </div>
+    <div class="bio__header marginTop10">
+        <h1>
+            <span class="bio__verified"><i class="fa fa-check"></i></span>
+            <div>
+              Edit Profile <i class="far fa-edit edit-btn btn" onclick="edit()" data-toggle="modal" data-target="#editPersonalInfo"> </i>
+            </div>
+        </h1>
+        <img src="https://s3-whjr-v2-prod-bucket.whjr.online/whjr-v2-prod-bucket/3aaa0fcb-be53-4ede-ac34-770d32a8f658.png" class="post-icon" />
+    </div>
+    <div class="bio_blurb">
+        <h2>About me</h2>
+        <p class="bio__description"></p>
+        <img src="https://s3-whjr-v2-prod-bucket.whjr.online/whjr-v2-prod-bucket/edd6faf2-76dc-48ff-ac5a-097cf99a7f3e.png" class="cake-icon" />
+        <p></p>
+    </div>
+</div>
+<hr />
+
+
+<!-- code for displaying posts of users information -->
+<h2 class="headings">
+    Posts <a href="" class="btn upload-btn" data-toggle="modal" data-target="#uploadModal"> <i class="fa fa-upload"></i> </a>
+</h2>
+
+<div class="col-md-4 text-center posts-box">
+    <div class="thumbnail">
+        <img src="1.jpg" class="posts" />
+        <h2 class="thumbnail-caption"></h2>
+        <i onclick="likes('1')" class="fas fa-heart"></i>
+    </div>
+</div>

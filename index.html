@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Discovr</title>
+    
+    <!-- Latest compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+    
+    <link rel="icon" type="image/x-icon" href="https://cdn.glitch.global/50b1383c-fc76-44e1-9dbf-07887448a437/Screenshot_2023-12-05_at_5.44.23_PM-removebg-preview.png?v=1701778582358">
+    <!-- Import the webpage's stylesheet -->
+    <link rel="stylesheet" href="/style.css" />
+    
+  </head>
+  <body class="bg-login">
+    
+    <!--  loader -->
+    
+    <div id="loading">
+      <img
+        id="loading-image"
+        src="https://s3-whjr-v2-prod-bucket.whjr.online/whjr-v2-prod-bucket/c4acf11c-669d-43f1-b847-5ccae6a71d21.gif"
+      />
+    </div>
+    
+    <img src="https://cdn.glitch.global/50b1383c-fc76-44e1-9dbf-07887448a437/Screenshot_2023-12-05_at_5.44.23_PM-removebg-preview.png?v=1701778582358" 
+         class="side-img"/>
+    
+    
+    <!--     Log in form  -->
+    <form class="form" id="login-form">
+      <div class="top-logo">
+        <img
+          src="https://cdn.glitch.global/50b1383c-fc76-44e1-9dbf-07887448a437/Screenshot_2023-12-05_at_5.44.23_PM-removebg-preview.png?v=1701778582358"
+        />
+      </div>
+      <div>
+        <input
+          type="text"
+          id="username"
+          placeholder="Username"
+          class="input-1"
+        />
+        <input
+          type="password"
+          id="password"
+          placeholder="Password"
+          class="input-2"
+        />
+
+        <!-- display error msg -->
+
+        <div id="error-loginfail">
+          Login failed because of wrong credentials
+        </div>
+
+        <!--  Log in button  -->
+
+        <a type="button" onclick="logIn()" class="btn"> Log In </a>
+        <br/>
+        <br/>
+        <a type="button" onclick="AdminlogIn()" class="btn"> Admin Log In </a>
+      </div>
+
+      <!--   Link which redirect to sign up page -->
+
+      <div class="sub-content">
+        <div class="s-part">
+          Don't have an account? <br /><br /><a class="btn" href="sign-up.html"
+            >Sign up</a
+          >
+        </div>
+      </div>
+    </form>
+    
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script
+      src="https://kit.fontawesome.com/e6f2fb51b4.js"
+      crossorigin="anonymous"
+    ></script>
+    
+    <!-- Import the webpage's javascript file -->
+    <script src="/script.js" defer></script>
+  </body>
+</html>
