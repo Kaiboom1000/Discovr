@@ -20,7 +20,5 @@ FEATURES TO BE ADDED IN FUTURE UPDATES:
 
 
 Credits:
-
 Made using Glitch, (foremerly Fog Creek)
-
 Database for the project - Airtable
