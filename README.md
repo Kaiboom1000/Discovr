@@ -5,6 +5,8 @@ Currently accpeting moderator applications, apply here: https://docs.google.com/
 
 This website is currently under beta testing, any suggestions welcome!
 
+Any form of exploiting, eg. accesing the code to get an admin login, deleting user profiles, etc. is not tolerated!
+
 <img src="https://cdn.glitch.global/50b1383c-fc76-44e1-9dbf-07887448a437/Screenshot%202023-12-05%20at%205.44.23%E2%80%AFPM.png?v=1701778507174"/>
 
 IDENTIFIED BUGS (Working on it):
