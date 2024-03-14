@@ -20,5 +20,6 @@ FEATURES TO BE ADDED IN FUTURE UPDATES:
 
 
 Credits:
-Made using Glitch, (foremerly Fog Creek)
-Database for the project - Airtable
+1. Made using Glitch, (foremerly Fog Creek)
+2. Database for the project - Airtable
+3. I made the logo myself lol
