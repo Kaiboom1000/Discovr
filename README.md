@@ -20,3 +20,4 @@ FEATURES TO BE ADDED IN FUTURE UPDATES:
 
 
 Made using Glitch, (foremerly Fog Creek)
+Database for the project - Airtable
