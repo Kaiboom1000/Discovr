@@ -19,5 +19,10 @@ FEATURES TO BE ADDED IN FUTURE UPDATES:
 2. Chatting area (Till then, why not put your Discord ID in your bio and DM?)
 
 
+Credits:
+
+
 Made using Glitch, (foremerly Fog Creek)
+
+
 Database for the project - Airtable
