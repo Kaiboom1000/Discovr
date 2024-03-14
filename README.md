@@ -13,4 +13,9 @@ IDENTIFIED BUGS (Working on it):
 1. A bug that dos not display the birth date and the number of posts of a user.
 2. A bug that does not show the error message when incorrect login credentials are entered.
 
+   
+FEATURES TO BE ADDED IN FUTURE UPDATES:
+Freind requests
+Chatting area (Till then, why not put your Discord ID in your bio and DM?)
+
 Made using Glitch, (foremerly Fog Creek)
