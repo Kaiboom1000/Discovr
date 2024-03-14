@@ -1,7 +1,7 @@
 # Discovr
 Discovr is an online social media website in which users can create profiles and upload posts.
 
-Currently accpeting moderator applications, apply here: https://docs.google.com/forms/d/19zak-WAz1VJ5Ji4OzAqyIYK1pqmt2Pucf3pMOndPWXU](https://docs.google.com/forms/d/e/1FAIpQLSeKP4vnr8odsSrqR5Wbwb1EMRRjOmHaUc00ix-6lrKCwuWCAA/viewform
+Currently accpeting moderator applications, apply here: https://docs.google.com/forms/d/e/1FAIpQLSeKP4vnr8odsSrqR5Wbwb1EMRRjOmHaUc00ix-6lrKCwuWCAA/viewform
 
 This website is currently under beta testing, any suggestions welcome!
 
