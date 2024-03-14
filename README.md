@@ -15,7 +15,8 @@ IDENTIFIED BUGS (Working on it):
 
    
 FEATURES TO BE ADDED IN FUTURE UPDATES:
-Freind requests
-Chatting area (Till then, why not put your Discord ID in your bio and DM?)
+1. Freind requests
+2. Chatting area (Till then, why not put your Discord ID in your bio and DM?)
+
 
 Made using Glitch, (foremerly Fog Creek)
