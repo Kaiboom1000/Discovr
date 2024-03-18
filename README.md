@@ -1,7 +1,7 @@
 # Discovr
 Discovr is an online social media website in which users can create profiles and upload posts.
 
-We are aware that the Github version of the website is glitching, try this link till we resolve the issue: https://discovr.glitch.me/
+We are aware that the Github version of the website is glitching, try this link till we resolve the issue: <a href="https://discovr.glitch.me/"> <button style="border-radius:10px; box-shadow:10px 10px 10px black; color:orange;"> Discovr <button> </a>
 
 Currently accpeting moderator applications, apply here: https://docs.google.com/forms/d/e/1FAIpQLSeKP4vnr8odsSrqR5Wbwb1EMRRjOmHaUc00ix-6lrKCwuWCAA/viewform
 
