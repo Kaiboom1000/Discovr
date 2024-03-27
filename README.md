@@ -16,6 +16,7 @@ Any form of exploiting, eg. accesing the code to get an admin login, deleting us
 IDENTIFIED BUGS (Working on it):
 1. A bug that dos not display the birth date and the number of posts of a user.
 2. A bug that does not show the error message when incorrect login credentials are entered.
+3. A bug that does not dislike the post once you click on the like button again, but increases the amount by 1 every time instead.
 
    
 FEATURES TO BE ADDED IN FUTURE UPDATES:
