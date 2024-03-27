@@ -1,7 +1,7 @@
 # Discovr
 Discovr is an online social media website in which users can create profiles and upload posts.
 
-Version 2 is out with admin commands for better moderation!
+Version 2 (Aether Update) is out with admin commands for better moderation!
 
 We are aware that the Github version of the website is glitching, try this link till we resolve the issue: <a href="https://discovr-v2.glitch.me/"> <button style="border-radius:10px; box-shadow:10px 10px 10px black; color:orange;"> Discovr <button> </a>
 
