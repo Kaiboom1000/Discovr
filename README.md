@@ -33,7 +33,7 @@ Credits:
 Version Plannings:
 V3: Future Update: Will bring ability to post stories. (Will work on the advertising as well.)
 
-V4: Lazar Update: Will bring ability to send friend requests (along with removing, blocking, and reported as well.) THe entire site will also get a modern, refeshed UI.
+V4: Lazar Update: Will bring ability to send friend requests (along with removing, blocking, and reported as well.) The entire site will also get a modern, refeshed UI.
 
 V5: SKAR Update: Will bring ability to chat and call users (friends) and group chats.
 
