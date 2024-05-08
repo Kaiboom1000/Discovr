@@ -6,7 +6,7 @@ Version 2.7.8 (Aether Update EDIT: Now added security) is out with admin command
 
 We are aware that the Github version of the website is glitching, try this link till we resolve the issue: <a href="https://discovr-v2.glitch.me/"> <button style="border-radius:10px; box-shadow:10px 10px 10px black; color:orange;"> Discovr <button> </a>
 
-Currently accpeting moderator applications, apply here: https://docs.google.com/forms/d/e/1FAIpQLSeKP4vnr8odsSrqR5Wbwb1EMRRjOmHaUc00ix-6lrKCwuWCAA/viewform
+Currently accpeting moderator applications, apply here: https://forms.gle/CQKay2jvoTQhhDKL9
 
 This website is currently under beta testing, any suggestions welcome!
 
