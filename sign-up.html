@@ -1,118 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>BestBuds</title>
-    
-    <!-- Latest compiled and minified CSS -->
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
-    />
-    
-    <!-- Import the webpage's stylesheet -->
-    <link rel="stylesheet" href="/style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Discovr — Sign Up</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
+  <body class="auth-page">
+    <main class="auth-layout signup-layout">
+      <section class="hero-panel glass-card">
+        <h1>Create your Discovr profile</h1>
+        <p>Set up your profile in less than a minute.</p>
+      </section>
 
-  <body class="bg-sign-up">
-    
-    <!--  loader -->
-    
-    <div id="loading">
-      <img
-        id="loading-image"
-        src="https://s3-whjr-v2-prod-bucket.whjr.online/whjr-v2-prod-bucket/c4acf11c-669d-43f1-b847-5ccae6a71d21.gif"
-      />
-    </div>
-    
-    <!-- Sign up form  -->
-    <img src="https://cdn.glitch.global/50b1383c-fc76-44e1-9dbf-07887448a437/Screenshot%202023-12-05%20at%205.44.23%E2%80%AFPM.png?v=1701778507174" 
-         class="side-img"/>
-    
-    <form class="form-sign-up">
-      <div>
-        <form method="post" enctype="multipart/form-data">
-          <label>Upload avatar first</label><br />
-          <label for="user-photo">User photo:</label><br />
-          <input
-            type="file"
-            id="image"
-            name="files[]"
-            multiple
-            required
-          /><br />
-          <label for="user-name">User name:</label><br />
-          <small
-            >(Username must be unique. Click on check to check if username is
-            available)</small
-          ><br />
-          <input type="text" id="user-name" class="input-1" required />
-          <input
-            type="button"
-            id="check"
-            onclick="usernameAvail()"
-            value="check"
-          /><br />
-          <label id="user-name-check-error">User not avilable</label><br />
-          <label for="user-password">Password:</label><br />
-          <input type="text" id="user-password" class="input-1" required />
-          <label for="aboutMe">About me:</label><br />
-          <textarea
-            id="aboutMe"
-            name="about me"
-            class="input-1"
-            required
-          ></textarea>
-          <label for="BDate">Birth date:</label><br />
-          <input
-            type="date"
-            id="BDate"
-            placeholder="About me"
-            class="input-1"
-            required
-          />
-          <br />
-          <label>Gender:</label>
-          <input
-            type="radio"
-            id="gender-M"
-            name="gender"
-            value="male"
-            required
-          />
-          <label for="gender-M">Male</label>
-          <input
-            type="radio"
-            id="gender-F"
-            name="gender"
-            value="female"
-            required
-          />
-          <label for="gender-F">Female</label>
-          <br />
-          <div id="error-signupfail">Please fill all fields</div>
+      <section class="auth-card glass-card">
+        <h2>Sign up</h2>
+        <div id="error-signupfail" class="error"></div>
 
-          <!--  Button for Sign-up -->
+        <label for="user-name">Username</label>
+        <input type="text" id="user-name" placeholder="unique username" />
 
-          <a type="button"
-            onclick="signUp()"
-            id="signup"
-            class="btn"
-             >Sign Up</a>
-        </form>
-      </div>
-    </form>
-    
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <label for="user-password">Password</label>
+        <input type="password" id="user-password" placeholder="choose a strong password" />
 
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script
-      src="https://kit.fontawesome.com/e6f2fb51b4.js"
-      crossorigin="anonymous"
-    ></script>
-    
-    <!-- Import the webpage's javascript file -->
-    <script src="/script.js" defer></script>
+        <label for="avatar-url">Avatar URL</label>
+        <input type="url" id="avatar-url" placeholder="https://..." />
+
+        <label for="aboutMe">About me</label>
+        <textarea id="aboutMe" rows="3" placeholder="Tell everyone who you are"></textarea>
+
+        <label for="BDate">Birth date</label>
+        <input type="date" id="BDate" />
+
+        <label>Gender</label>
+        <div class="radio-row">
+          <label><input type="radio" name="gender" value="male" /> Male</label>
+          <label><input type="radio" name="gender" value="female" /> Female</label>
+          <label><input type="radio" name="gender" value="other" /> Other</label>
+        </div>
+
+        <button id="check">Check Username</button>
+        <button id="signup" class="primary">Create Account</button>
+
+        <p class="muted foot-note">
+          Already have an account? <a href="index.html">Go to login</a>
+        </p>
+      </section>
+    </main>
+
+    <div id="loading" class="loading-overlay"><div class="loader"></div></div>
+
+    <script src="airtable-config.js"></script>
+    <script src="app-core.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>
