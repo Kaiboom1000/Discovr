@@ -1,350 +1,136 @@
-// loading the profile page dynamically
+(function () {
+  const core = window.DiscovrCore;
+  const usersTable = core.config.airtable.tables.users;
+  const postsTable = core.config.airtable.tables.posts;
 
-// var URLForProfiledata = "https://api.airtable.com/v0/appMXTX7OMCm75fGG/userprofiledata";
-// var URLForPostdata = "https://api.airtable.com/v0/appMXTX7OMCm75fGG/post";
-// var key = "Bearer keyVvxVRuGzP8OeqG";
-var URLForProfiledata ="https://api.airtable.com/v0/appgI2se0yKA6c7Kx/userprofiledata";
-var URLForPostdata="https://api.airtable.com/v0/appgI2se0yKA6c7Kx/post";
-var key="Bearer patLYazkg4CuHxTJ7.1e7b13e84fde74c4bb382c7bf148a168da2a2a9b134a65d85a7b59c820a094e5"
+  const session = core.getSession();
+  if (!session) window.location.href = "index.html";
 
-var username = localStorage.getItem("userid");
-var error=0;
-var count=0;
-
-addInfo();
-addPosts();
-
-function signOut(){
-  localStorage.setItem('userid', '0');
-  window.open("index.html", "_self");
-}
-
-// get all users profile info
-function addInfo() {
-  fetch(URLForProfiledata, {
-    method: "GET",
-    headers: {
-      Authorization: key,
-      "Content-Type": "application/json"
-    }
-  }).then(response =>
-    response.json().then(data => {
-      if (data.records.length > 0) {
-        var temp = "";
-
-        // start For loop to get user details
-
-        data.records.forEach(u => {
-          if (u.fields.id == username) {
-            // fetching user details
-          
-            // add HTML code in temp varibale
-           temp +=`
-            <div class="margin25">
-              <div class="bio__img-block">
-                  <a href="#"><img class="bio__img" src="${u.fields.avatar}" alt="profile picture" /></a>
-              </div>
-               <div>
-                  <h1>
-                      <span class="bio__verified">${u.fields.UserName}<i class="fa fa-check"></i></span>
-                  </h1>
-                  <div>
-                    Edit Profile <i class='far fa-edit edit-btn btn'onclick="edit('${username}')" 
-                    data-toggle='modal' data-target='#editPersonalInfo'></i>
-                  </div>
-                  
-              </div>
-              <div class="bio_blurb">
-              <h2>About me</h2>
-              <p class="bio__description">${u.fields.Aboutme}</p>
-              <img src="https://s3-whjr-v2-prod-bucket.whjr.online/whjr-v2-prod-bucket/edd6faf2-76dc-48ff-ac5a-097cf99a7f3e.png" 
-              class="cake-icon" />
-              <p>${u.fields.dob}</p>
-              <img src="https://s3-whjr-v2-prod-bucket.whjr.online/whjr-v2-prod-bucket/3aaa0fcb-be53-4ede-ac34-770d32a8f658.png" 
-              class="post-icon" />
-              <p>${u.fields.postCount}</p>
-              </div>
-          </div><hr />`
-          }
-        });
-
-        // adding HTML to profile.html page
-        document.getElementById("profilepage").innerHTML = temp;
-      }
-    })
-  );
+  function signOut() {
+    core.clearSession();
+    window.location.href = "index.html";
   }
 
-// fetching all post of user
+  function renderProfile(user) {
+    const target = document.getElementById("profilepage");
+    target.innerHTML = `
+      <img class="profile-avatar" src="${core.toHtml(user.fields.avatar)}" alt="avatar" />
+      <h2>${core.toHtml(user.fields.username)}</h2>
+      <p class="muted">${core.toHtml(user.fields.about)}</p>
+      <div class="profile-meta">
+        <span>🎂 ${core.toHtml(user.fields.dob)}</span>
+        <span>🧬 ${core.toHtml(user.fields.gender)}</span>
+      </div>
+    `;
+  }
 
-function addPosts() {
-  fetch(URLForPostdata, {
-    method: "GET",
-    headers: {
-      Authorization: key,
-      "Content-Type": "application/json"
+  function renderPosts(posts, usersById, isOwn = false) {
+    const target = document.getElementById("postpage");
+    if (!posts.length) {
+      target.innerHTML = "<p class='muted'>No posts yet.</p>";
+      return;
     }
-  }).then(response =>
-    response.json().then(data => {
-      if (data.records.length > 0) {
-        
-        // start For loop
 
-        var temp1 =  `
-        <h2 class="headings">
-    Posts <a href="" class="btn upload-btn" data-toggle="modal" data-target="#uploadModal"> <i class="fa fa-upload"></i> </a>
-</h2>
-                 `;
-        
-        data.records.forEach(u => {
-          // fetching all posts of the user
-
-          if (u.fields.userID == username) {
-            var post_id = u.fields.id;
-            temp1 +=  `<div class="col-md-4 text-center posts-box">
-    <div class="thumbnail">
-        <img src="${u.fields.url}" class="posts" />
-        <h2 class="thumbnail-caption">${u.fields.caption}</h2>
-        <i onclick="likes('${u.fields.id}',${u.fields.Likes})" class="fas fa-heart">${u.fields.Likes}</i>
-    </div>
-    <img src="https://s3-whjr-v2-prod-bucket.whjr.online/whjr-v2-prod-bucket/3aaa0fcb-be53-4ede-ac34-770d32a8f658.png" 
-              class="post-icon" />
-              <p>${u.fields.postCount}</p>
-</div>
-                  `
-              }
-        });
-
-
-        // adding all posts to profile.html page
-
-        document.getElementById("postpage").innerHTML = temp1;
-      }
-    })
-  );
-}
-
-// function to search user on best buds
-
-function searchResults() {
-  
-  var searchVal = document.getElementById("searchVal").value;
-
-  fetch(URLForProfiledata, {
-    method: "GET",
-    headers: {
-      Authorization: key,
-      "Content-Type": "application/json"
-    }
-  }).then(response =>
-    response.json().then(data => {
-      if (data.records.length > 0) {
-        var temp3 = "";
-
-        // start For loop
-        
-
-        data.records.forEach(u => {
-          if (u.fields.UserName == searchVal) {
-            temp3 += 
-              `<div class="wells">
-                  <img src="${u.fields.avatar}" class="sresult-icon" 
-                  onclick="openProfile('${u.fields.id}')" />
-                  ${u.fields.UserName}
-               </div>`
-          }
-        });
-
-        $("#searchresult").modal("show");
-
-        // adding HTML to profile.html
-        document.getElementById("sResults").innerHTML = temp3;
-        
-      }
-    })
-  );
-}
-
-// this function will open the serach profile on best buds
-function openProfile(id) {
-  localStorage.setItem("randomProfile", id);
-  window.open("randomProfile.html", "_self");
-}
-
-// this function will edit the profile details
-function edit(id) {
-
-   fetch(`${URLForProfiledata}/${id}`,{
-    method: "GET", // or 'PUT'
-    headers: {
-      Authorization: key,
-      "Content-Type": "application/json"
-    }
-  }).then(response=>response.json().then(data => {
-      document.getElementById("edit-about").value = data.fields.Aboutme;
-      var update_id = data.fields.id;
-  }));
-}
-
-//Updating the edited details on best buds
-function updateData() {
-  var about = document.getElementById("edit-about");
-  var updatedTask = {
-        records:[{
-          "id":username,
-          "fields": {
-            Aboutme: about.value
-        }
-      }]
-  } 
-  fetch(URLForProfiledata, {
-    method: 'PATCH', // or 'PUT'
-    headers: {
-      Authorization: key,
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(updatedTask)
-  })
-  .then(response => response.json())
-  .then(data => {
-    window.open("profile.html", "_self");
-    });
-}
-
-// this function to upload new post on best buds
-function uploadPost() {
-  var postCaption = document.getElementById("pst-caption").value;
-  var image = document.getElementById("newPost");
-  var files = image.files[0];
-  var newPost;
-  if (files) {
-    const fileReader = new FileReader();
-    fileReader.readAsDataURL(files);
-    fileReader.addEventListener("load", function() {
-    var imageLink = this.result;
-      
-      newPost = {
-        records: [
-          {
-            fields: {
-              userID: username,
-              caption: postCaption,
-              url: imageLink,
-              Likes: parseInt(0)
-            }
-          }
-        ]
-      };
-     
-      fetch(URLForPostdata, {
-        method: "POST",
-        headers: {
-          Authorization: key,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(newPost)
+    target.innerHTML = posts
+      .map((post) => {
+        const author = usersById.get(post.fields.userRecordId);
+        const who = author ? author.fields.username : "Unknown";
+        return `
+          <article class="post-card glass-card">
+            <img class="posts" src="${core.toHtml(post.fields.imageUrl)}" alt="post image" />
+            <h3 class="thumbnail-caption">${core.toHtml(post.fields.caption || "")}</h3>
+            <p class="muted">by ${core.toHtml(who)}</p>
+            <p>❤️ ${Number(post.fields.likes || 0)}</p>
+            ${isOwn ? `<button data-del="${post.id}" class="danger delete-post">Delete</button>` : ""}
+          </article>
+        `;
       })
-        .then(response => {
-          response.json();
-          if (response.status == 200){
-            error = 0;
-          }
-        else{
-          error = 1;
-        } }) 
+      .join("");
 
-        .then(data => {
-          if(error == 0){
-            incrementPostCount(username);
-            document.getElementById("post-upload-success").innerHTML = "Uploaded successfully";
-            error=1;
-            window.open("profile.html", "_self");
-          }
-        else{
-          document.getElementById("post-upload-success").innerHTML = "Error in processing image. Try with diffrent image.";
+    target.querySelectorAll(".delete-post").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        core.showLoading(true);
+        try {
+          await core.deleteRecord(postsTable, btn.dataset.del);
+          await load();
+        } catch (err) {
+          alert(err.message);
+        } finally {
+          core.showLoading(false);
         }
-        });
-        
+      });
     });
   }
-}
 
-// this function will increment post count when a post is added
-function incrementPostCount(username) {
-  // getting the current postcount
-  var count = 0;
+  async function searchProfile() {
+    const value = (document.getElementById("searchVal").value || "").trim();
+    if (!value) return;
 
-  fetch(URLForProfiledata, {
-    method: "GET", // or 'PUT'
-    headers: {
-      Authorization: key,
-      "Content-Type": "application/json"
-    },
-  }).then(response =>
-    response.json().then(data => {
-      if (data.records.length > 0) {
-        // start For loop
-
-        data.records.forEach(u => {
-          if (username == u.fields.id) {
-            count = u.fields.postCount;
-            count++;
-            var UpdatePostCount = {
-              records: [
-                {
-                  id: username,
-                  fields: {
-                    postCount: count
-                  }
-                }
-              ]
-            };
-            // updating the count value
-
-            fetch(URLForProfiledata, {
-              method: "PATCH", // or 'PUT'
-              headers: {
-                Authorization: key,
-                "Content-Type": "application/json"
-              },
-              body: JSON.stringify(UpdatePostCount)
-            })
-          }
-        });
-
-        // Close For Loop
+    core.showLoading(true);
+    try {
+      const users = await core.listRecords(usersTable, `{username}='${value.replaceAll("'", "\\'")}'`);
+      if (!users.length) {
+        alert("No profile found.");
+        return;
       }
-    })
-  );
-}
+      core.saveViewedProfile(users[0].id);
+      window.location.href = "randomProfile.html";
+    } catch (err) {
+      alert(err.message);
+    } finally {
+      core.showLoading(false);
+    }
+  }
 
-// this function is used to add likes to post
-function likes(id, val) {
-  
-  var val = val + 1;
-  var UpdateLikes = {
-    records: [
-      {
-        id: id,
-        fields: {
-          Likes: parseInt(val)
-        }
-      }
-    ]
-  };
-  fetch(URLForPostdata, {
-    method: "PATCH", // or 'PUT'
-    headers: {
-      Authorization: key,
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(UpdateLikes)
-  })
-    .then(response => response.json())
-    .then(data => {
-      console.log("Success:", data);
-    });
-  
-  addPosts();
-  
-}
+  async function uploadPost() {
+    const imageUrl = (document.getElementById("newPostUrl").value || "").trim();
+    const caption = (document.getElementById("pst-caption").value || "").trim();
+    if (!imageUrl) return alert("Image URL is required.");
+
+    core.showLoading(true);
+    try {
+      await core.createRecord(postsTable, {
+        userRecordId: session.userRecordId,
+        imageUrl,
+        caption,
+        likes: 0,
+        createdAt: new Date().toISOString()
+      });
+      document.getElementById("composerDialog").close();
+      await load();
+    } catch (err) {
+      alert(err.message);
+    } finally {
+      core.showLoading(false);
+    }
+  }
+
+  async function load() {
+    core.showLoading(true);
+    try {
+      const [users, posts] = await Promise.all([core.listRecords(usersTable), core.listRecords(postsTable)]);
+      const currentUser = users.find((u) => u.id === session.userRecordId);
+      if (!currentUser) return signOut();
+
+      const usersById = new Map(users.map((u) => [u.id, u]));
+      const ownPosts = posts
+        .filter((p) => p.fields.userRecordId === session.userRecordId)
+        .sort((a, b) => new Date(b.fields.createdAt || 0) - new Date(a.fields.createdAt || 0));
+
+      renderProfile(currentUser);
+      renderPosts(ownPosts, usersById, true);
+    } catch (err) {
+      alert(err.message);
+    } finally {
+      core.showLoading(false);
+    }
+  }
+
+  document.getElementById("signOutBtn")?.addEventListener("click", signOut);
+  document.getElementById("searchBtn")?.addEventListener("click", searchProfile);
+  document.getElementById("openComposer")?.addEventListener("click", () => document.getElementById("composerDialog").showModal());
+  document.getElementById("closeComposer")?.addEventListener("click", () => document.getElementById("composerDialog").close());
+  document.getElementById("uploadBtn")?.addEventListener("click", uploadPost);
+
+  load();
+})();

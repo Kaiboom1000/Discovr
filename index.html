@@ -1,91 +1,46 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>Discovr</title>
-    
-    <!-- Latest compiled and minified CSS -->
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
-    />
-    
-    <link rel="icon" type="image/x-icon" href="https://cdn.glitch.global/50b1383c-fc76-44e1-9dbf-07887448a437/Screenshot_2023-12-05_at_5.44.23_PM-removebg-preview.png?v=1701778582358">
-    <!-- Import the webpage's stylesheet -->
-    <link rel="stylesheet" href="/style.css" />
-    
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Discovr — Login</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
-  <body class="bg-login">
-    
-    <!--  loader -->
-    
-    <div id="loading">
-      <img
-        id="loading-image"
-        src="https://s3-whjr-v2-prod-bucket.whjr.online/whjr-v2-prod-bucket/c4acf11c-669d-43f1-b847-5ccae6a71d21.gif"
-      />
-    </div>
-    
-    <img src="https://cdn.glitch.global/50b1383c-fc76-44e1-9dbf-07887448a437/Screenshot_2023-12-05_at_5.44.23_PM-removebg-preview.png?v=1701778582358" 
-         class="side-img"/>
-    
-    
-    <!--     Log in form  -->
-    <form class="form" id="login-form">
-      <div class="top-logo">
-        <img
-          src="https://cdn.glitch.global/50b1383c-fc76-44e1-9dbf-07887448a437/Screenshot_2023-12-05_at_5.44.23_PM-removebg-preview.png?v=1701778582358"
-        />
-      </div>
-      <div>
-        <input
-          type="text"
-          id="username"
-          placeholder="Username"
-          class="input-1"
-        />
-        <input
-          type="password"
-          id="password"
-          placeholder="Password"
-          class="input-2"
-        />
+  <body class="auth-page">
+    <main class="auth-layout">
+      <section class="hero-panel glass-card">
+        <h1>Discovr</h1>
+        <p>Meet creators, share moments, and build your vibe.</p>
+        <ul>
+          <li>⚡ Fast static hosting compatible with GitHub Pages</li>
+          <li>🧊 Modern glassmorphism aesthetic</li>
+          <li>☁️ Airtable-powered social data</li>
+        </ul>
+      </section>
 
-        <!-- display error msg -->
+      <section class="auth-card glass-card">
+        <h2>Welcome back</h2>
+        <p class="muted">Log in to open your social dashboard.</p>
+        <div id="error-loginfail" class="error"></div>
+        <label for="username">Username</label>
+        <input type="text" id="username" placeholder="your_username" />
 
-        <div id="error-loginfail">
-          Login failed because of wrong credentials
-        </div>
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="••••••••" />
 
-        <!--  Log in button  -->
+        <button id="loginBtn">Log In</button>
+        <button id="adminLoginBtn" class="secondary">Admin Login</button>
 
-        <a type="button" onclick="logIn()" class="btn"> Log In </a>
-        <br/>
-        <br/>
-        <a type="button" onclick="AdminlogIn()" class="btn"> Admin Log In </a>
-      </div>
+        <p class="muted foot-note">
+          New here? <a href="sign-up.html">Create an account</a>
+        </p>
+      </section>
+    </main>
 
-      <!--   Link which redirect to sign up page -->
+    <div id="loading" class="loading-overlay"><div class="loader"></div></div>
 
-      <div class="sub-content">
-        <div class="s-part">
-          Don't have an account? <br /><br /><a class="btn" href="sign-up.html"
-            >Sign up</a
-          >
-        </div>
-      </div>
-    </form>
-    
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script
-      src="https://kit.fontawesome.com/e6f2fb51b4.js"
-      crossorigin="anonymous"
-    ></script>
-    
-    <!-- Import the webpage's javascript file -->
-    <script src="/script.js" defer></script>
+    <script src="airtable-config.js"></script>
+    <script src="app-core.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>

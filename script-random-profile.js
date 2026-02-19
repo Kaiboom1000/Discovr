@@ -1,111 +1,58 @@
-// loading the profile page dynamically
+(function () {
+  const core = window.DiscovrCore;
+  const usersTable = core.config.airtable.tables.users;
+  const postsTable = core.config.airtable.tables.posts;
 
-// var URLForProfiledata =
-//   "https://api.airtable.com/v0/appMXTX7OMCm75fGG/userprofiledata";
-// var URLForPostdata = "https://api.airtable.com/v0/appMXTX7OMCm75fGG/post";
-// var key = "Bearer keyVvxVRuGzP8OeqG";
-var URLForProfiledata ="https://api.airtable.com/v0/appgI2se0yKA6c7Kx/userprofiledata";
-var URLForPostdata="https://api.airtable.com/v0/appgI2se0yKA6c7Kx/post";
-var key="Bearer patLYazkg4CuHxTJ7.1e7b13e84fde74c4bb382c7bf148a168da2a2a9b134a65d85a7b59c820a094e5"
+  const session = core.getSession();
+  const viewedId = core.getViewedProfile();
+  if (!session || !viewedId) window.location.href = "profile.html";
 
-var username = localStorage.getItem("randomProfile");
-var showposts = 1;
+  function renderProfile(user) {
+    document.getElementById("profilepage").innerHTML = `
+      <img class="profile-avatar" src="${core.toHtml(user.fields.avatar)}" alt="avatar" />
+      <h2>${core.toHtml(user.fields.username)}</h2>
+      <p class="muted">${core.toHtml(user.fields.about)}</p>
+      <div class="profile-meta">
+        <span>🎂 ${core.toHtml(user.fields.dob)}</span>
+        <span>🧬 ${core.toHtml(user.fields.gender)}</span>
+      </div>
+    `;
+  }
 
-// get all users profile info
+  function renderPosts(posts) {
+    const target = document.getElementById("postpage");
+    target.innerHTML = posts.length
+      ? posts
+          .map(
+            (post) => `
+      <article class="post-card glass-card">
+        <img class="posts" src="${core.toHtml(post.fields.imageUrl)}" alt="post" />
+        <h3 class="thumbnail-caption">${core.toHtml(post.fields.caption || "")}</h3>
+        <p>❤️ ${Number(post.fields.likes || 0)}</p>
+      </article>`
+          )
+          .join("")
+      : "<p class='muted'>This user has no posts yet.</p>";
+  }
 
-fetch(URLForProfiledata, {
-    method: "GET",
-    headers: {
-      Authorization: key,
-      "Content-Type": "application/json"
+  async function load() {
+    core.showLoading(true);
+    try {
+      const [users, posts] = await Promise.all([core.listRecords(usersTable), core.listRecords(postsTable)]);
+      const user = users.find((u) => u.id === viewedId);
+      if (!user) return (window.location.href = "profile.html");
+      renderProfile(user);
+      renderPosts(posts.filter((p) => p.fields.userRecordId === viewedId));
+    } catch (err) {
+      alert(err.message);
+    } finally {
+      core.showLoading(false);
     }
-  }).then(response =>
-    response.json().then(data => {
-      if (data.records.length > 0) {
-        var temp = "";
+  }
 
-        // start For loop to get user details
+  document.getElementById("backBtn")?.addEventListener("click", () => {
+    window.location.href = session.isAdmin ? "adminprofile.html" : "profile.html";
+  });
 
-        data.records.forEach(u => {
-          if (u.fields.id == username) {
-            // fetching user details
-          if(u.fields.postCount == "0"){
-           showposts = 0; 
-          }
-            // add HTML code in temp varibale
-           temp +=`
-            <div class="margin25">
-              <div class="bio__img-block">
-                  <a href="#"><img class="bio__img" src="${u.fields.avatar}" alt="profile picture" /></a>
-              </div>
-               <div>
-                  <h1>
-                      <span class="bio__verified">${u.fields.UserName}<i class="fa fa-check"></i></span>
-                  </h1>
-              </div>
-              <div class="bio_blurb">
-              <h2>About me</h2>
-              <p class="bio__description">${u.fields.Aboutme}</p>
-              <img src="https://s3-whjr-v2-prod-bucket.whjr.online/whjr-v2-prod-bucket/edd6faf2-76dc-48ff-ac5a-097cf99a7f3e.png" 
-              class="cake-icon" />
-              <p>${u.fields.dob}</p>
-              <img src="https://s3-whjr-v2-prod-bucket.whjr.online/whjr-v2-prod-bucket/3aaa0fcb-be53-4ede-ac34-770d32a8f658.png" 
-              class="post-icon" />
-              <p>${u.fields.postCount}</p>
-              </div>
-          </div><hr />`
-          }
-        });
-
-        // adding HTML to profile.html page
-        document.getElementById("profilepage").innerHTML = temp;
-      }
-    })
-  );
-if(showposts == 1){
-  addPosts();
-}
-
-function addPosts() {
-  fetch(URLForPostdata, {
-    method: "GET",
-    headers: {
-      Authorization: key,
-      "Content-Type": "application/json"
-    }
-  }).then(response =>
-    response.json().then(data => {
-      if (data.records.length > 0) {
-        
-        // start For loop
-
-        var temp1 =  `
-                  <h2 class="headings">
-                      Posts
-                  </h2>`;
-        
-        data.records.forEach(u => {
-          // fetching all posts of the user
-
-          if (u.fields.userID == username) {
-            var post_id = u.fields.id;
-            temp1 +=  `
-                  <div class="col-md-4 text-center posts-box">
-                      <div class="thumbnail">
-                          <img src="${u.fields.url}" class="posts" />
-                          <h2 class="thumbnail-caption">${u.fields.caption}</h2>
-                          <i onclick="likes('${u.fields.id}',${u.fields.Likes})" 
-                          class="fas fa-heart">${u.fields.Likes}</i>
-                      </div>
-                  </div>`
-              }
-        });
-
-
-        // adding all posts to profile.html page
-
-        document.getElementById("postpage").innerHTML = temp1;
-      }
-    })
-  );
-}
+  load();
+})();

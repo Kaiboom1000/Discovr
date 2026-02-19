@@ -1,44 +1,91 @@
-# Discovr
-Discovr is an online social media website in which users can create profiles and upload posts.
+# Discovr (Rebuilt)
 
- 
-Version 2.7.8 (Aether Update EDIT: Now added security) is out with admin commands for better moderation!
+A fully redesigned static social media frontend using modern glassmorphism UI and Airtable as the backend.
 
-We are aware that the Github version of the website is glitching, try this link till we resolve the issue: <a href="https://discovr-v2.glitch.me/"> <button style="border-radius:10px; box-shadow:10px 10px 10px black; color:orange;"> Discovr <button> </a>
+## What changed
 
-Currently accpeting moderator applications, apply here: https://forms.gle/CQKay2jvoTQhhDKL9
+- Complete UI + UX rewrite for all pages.
+- New clean JavaScript architecture with shared core helpers.
+- Removed hardcoded secrets from source logic.
+- Added a dedicated credentials/config file: `airtable-config.js`.
+- All links are GitHub Pages-friendly (relative paths).
 
-This website is currently under beta testing, any suggestions welcome!
+---
 
-A̶n̶y̶ f̶o̶r̶m̶ o̶f̶ e̶x̶p̶l̶o̶i̶t̶i̶n̶g̶, e̶g̶. a̶c̶c̶e̶s̶i̶n̶g̶ t̶h̶e̶ c̶o̶d̶e̶ t̶o̶ g̶e̶t̶ a̶n̶ a̶d̶m̶i̶n̶ l̶o̶g̶i̶n̶, d̶e̶l̶e̶t̶i̶n̶g̶ u̶s̶e̶r̶ p̶r̶o̶f̶i̶l̶e̶s̶, e̶t̶c̶. i̶s̶ n̶o̶t̶ t̶o̶l̶e̶r̶a̶t̶e̶d̶!̶ Security now added, all operations functional!
+## 1) Airtable setup (exact fields)
 
-<img src="https://cdn.glitch.global/50b1383c-fc76-44e1-9dbf-07887448a437/Screenshot%202023-12-05%20at%205.44.23%E2%80%AFPM.png?v=1701778507174"/>
+Create one Airtable **Base** and add these two tables.
 
-IDENTIFIED BUGS (Working on it):
-1. A bug that does not display the birth date and the number of posts of a user.
-2. A bug that does not show the error message when incorrect login credentials are entered.
-3. A bug that does not dislike the post once you click on the like button again, but increases the amount by 1 every time instead.
+### Table A: `users`
 
-   
-FEATURES TO BE ADDED IN FUTURE UPDATES:
-1. Freind requests
-2. Chatting area (Till then, why not put your Discord ID in your bio and DM?)
+Create these fields exactly:
 
+1. `username` → **Single line text** (unique usernames)
+2. `password` → **Single line text**
+3. `avatar` → **URL**
+4. `about` → **Long text**
+5. `dob` → **Date**
+6. `gender` → **Single select** (`male`, `female`, `other`)
+7. `isAdmin` → **Checkbox** (optional but recommended)
+8. `postCount` → **Number** (optional; admin table displays it if present)
 
-Credits:
-1. Made using Glitch, (foremerly Fog Creek)
-2. Database for the project - Airtable
-3. I made the logo myself lol
+### Table B: `posts`
 
-Version Plannings:
+Create these fields exactly:
 
-V3: Future Update: Will bring ability to post stories. (Will work on the advertising as well.)
+1. `userRecordId` → **Single line text** (store the Airtable record id of the user, e.g. `recxxxx`)
+2. `imageUrl` → **URL**
+3. `caption` → **Long text**
+4. `likes` → **Number**
+5. `createdAt` → **Date time**
 
-V4: Lazar Update: Will bring ability to send friend requests (along with removing, blocking, and reported as well.) The entire site will also get a modern, refeshed UI.
+---
 
-V5: SKAR Update: Will bring ability to chat and call users (friends) and group chats.
+## 2) Generate Airtable credentials
 
-NOTE: All bugs will be fixed in the same update they were recongnized.
+1. Open Airtable Developer Hub and create a **Personal Access Token**.
+2. Give the token read/write permissions for records on this base.
+3. Copy your **Base ID** from Airtable API docs.
 
-Copyright 2024 - Discovr
+---
 
+## 3) Configure the app
+
+Open `airtable-config.js` and replace:
+
+- `REPLACE_WITH_YOUR_BASE_ID`
+- `REPLACE_WITH_YOUR_PERSONAL_ACCESS_TOKEN`
+
+You may also customize:
+
+- `adminUsernames` (who can use admin login)
+- table names if you used different names
+
+---
+
+## 4) Run locally
+
+```bash
+python3 -m http.server 4173
+```
+
+Open:
+
+- `http://127.0.0.1:4173/index.html`
+
+---
+
+## 5) Deploy to GitHub Pages
+
+Because all assets use relative paths, this repo works under:
+
+- `https://<username>.github.io/<repo-name>/`
+
+No additional path rewrites required.
+
+---
+
+## Security note
+
+This is a static frontend app. Any token used client-side is visible in browser dev tools.
+For production-grade security, move Airtable writes to a server/API proxy and keep tokens server-side.
